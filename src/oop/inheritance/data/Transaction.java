@@ -7,7 +7,9 @@ public class Transaction {
     private Card card;
     private LocalDateTime localDateTime;
 
+
     public int getAmountInCents() {
+
         return amountInCents;
     }
 
@@ -16,6 +18,7 @@ public class Transaction {
     }
 
     public Card getCard() {
+
         return card;
     }
 
@@ -24,10 +27,14 @@ public class Transaction {
     }
 
     public LocalDateTime getLocalDateTime() {
+
         return localDateTime;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
+
         this.localDateTime = localDateTime;
     }
+
 }
+

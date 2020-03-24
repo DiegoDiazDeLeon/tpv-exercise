@@ -10,11 +10,13 @@ public class TransactionResponse {
     }
 
     public boolean isApproved() {
+
         return approved;
     }
 
-    public void setApproved(boolean approved) {
+    public TransactionResponse setApproved(boolean approved) {
         this.approved = approved;
+        return this;
     }
 
     public String getHostReference() {
@@ -22,6 +24,9 @@ public class TransactionResponse {
     }
 
     public void setHostReference(String hostReference) {
+
         this.hostReference = hostReference;
+
     }
+
 }
