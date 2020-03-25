@@ -3,8 +3,10 @@ package oop.inheritance.ingenico;
 import oop.inheritance.data.Card;
 import oop.inheritance.data.EntryMode;
 import oop.inheritance.data.ExpirationDate;
+import oop.inheritance.tpv.CardSwipperInterface;
+import oop.inheritance.tpv.IngenicoDisplayInterface;
 
-public class IngenicoCardSwipper {
+public class IngenicoCardSwipper implements CardSwipperInterface {
 
     public Card readCard(){
 

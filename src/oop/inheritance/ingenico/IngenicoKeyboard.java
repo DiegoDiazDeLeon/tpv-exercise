@@ -1,10 +1,12 @@
 package oop.inheritance.ingenico;
 
-public class IngenicoKeyboard {
+import oop.inheritance.tpv.IngenicoKeyboardInterface;
+
+public class IngenicoKeyboard implements IngenicoKeyboardInterface {
 
     private static IngenicoKeyboard  uniqueInstance= null; //instancia empieza en null
 
-    private IngenicoKeyboard(){
+    public IngenicoKeyboard(){
 
     }
 

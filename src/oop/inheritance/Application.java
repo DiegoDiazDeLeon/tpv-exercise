@@ -15,15 +15,21 @@ import oop.inheritance.ingenico.IngenicoGPS;
 import oop.inheritance.ingenico.IngenicoKeyboard;
 import oop.inheritance.ingenico.IngenicoModem;
 import oop.inheritance.ingenico.IngenicoPrinter;
+import oop.inheritance.tpv.AbstractTPVFactory;
 import oop.inheritance.verifone.v240m.VerifoneV240mDisplay;
 
-public class Application {
+public class Application implements Strategy {
 
+    private final AbstractTPVFactory abstractTPVFactory;
     private CommunicationType communicationType = CommunicationType.ETHERNET;
     private SupportedTerminal supportedTerminal;
 
-    public Application(SupportedTerminal supportedTerminal) {
-        this.supportedTerminal = supportedTerminal;
+    //public Application(SupportedTerminal supportedTerminal) {
+      //  this.supportedTerminal = supportedTerminal;
+    //}
+
+    public Application(AbstractTPVFactory abstractTPVFactory) {
+        this.abstractTPVFactory = abstractTPVFactory;
     }
 
     public void showMenu() {
@@ -54,11 +60,13 @@ public class Application {
     }
 
     public void doSale() {
-        IngenicoCardSwipper cardSwipper = new IngenicoCardSwipper();
-        IngenicoChipReader chipReader = new IngenicoChipReader();
-        IngenicoDisplay ingenicoDisplay = IngenicoDisplay.getInstance();
-        IngenicoKeyboard ingenicoKeyboard = IngenicoKeyboard.getInstance();
+        IngenicoCardSwipper cardSwipper = abstractTPVFactory.getCardSwipper();
+        IngenicoChipReader chipReader = abstractTPVFactory.getChipReader();
+        IngenicoDisplay ingenicoDisplay = abstractTPVFactory.getDisplay();
+        IngenicoKeyboard ingenicoKeyboard = abstractTPVFactory.getKeyboard();
         Card card;
+
+
 
         do {
             card = cardSwipper.readCard();
@@ -72,11 +80,14 @@ public class Application {
 
         String amount = ingenicoKeyboard.get(); //Amount with decimal point as string
 
-        Transaction transaction = new Transaction();
+        Transaction transaction = Transaction.builder()
+                .localDateTime(LocalDateTime.now())
+                .card(card)
+                .amountInCents(Integer.parseInt(amount.replace(".", "")));
 
-        transaction.setLocalDateTime(LocalDateTime.now());
-        transaction.setCard(card);
-        transaction.setAmountInCents(Integer.parseInt(amount.replace(".", "")));
+        //transaction.setLocalDateTime(LocalDateTime.now());
+        //transaction.setCard(card);
+        //transaction.setAmountInCents(Integer.parseInt(amount.replace(".", "")));
 
         TransactionResponse response = sendSale(transaction);
 
@@ -151,5 +162,10 @@ public class Application {
 
             verifoneV240mDisplay.clear();
         }
+    }
+
+    @Override
+    public void strategy() {
+
     }
 }
