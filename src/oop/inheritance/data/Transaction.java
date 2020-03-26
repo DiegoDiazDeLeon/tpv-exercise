@@ -7,7 +7,7 @@ public class Transaction {
     private Card card;
     private LocalDateTime localDateTime;
 
-    public static Transaction builder() {
+    public static TransactionBuilder builder() {
         return new TransactionBuilder();
     }
 
@@ -25,7 +25,7 @@ public class Transaction {
         return card;
     }
 
-    public void card(Card card) {
+    public void setCard(Card card) {
         this.card = card;
     }
 
@@ -34,7 +34,7 @@ public class Transaction {
         return localDateTime;
     }
 
-    public void localDateTime(LocalDateTime localDateTime) {
+    public void setLocalDateTime(LocalDateTime localDateTime) {
 
         this.localDateTime = localDateTime;
     }
